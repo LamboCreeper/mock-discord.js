@@ -3,6 +3,8 @@ import GUILD_DEFAULTS from "./defaults/guild";
 import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
+import USER_DEFAULTS from "./defaults/user";
+import GUILD_MEMBER_DEFAULTS from "./defaults/guildmember";
 
 class BaseMocks {
 	private static client: Discord.Client;
@@ -10,6 +12,8 @@ class BaseMocks {
 	private static channel: Discord.Channel;
 	private static guildChannel: Discord.GuildChannel;
 	private static textChannel: Discord.TextChannel;
+	private static user: Discord.User;
+	private static guildMember: Discord.GuildMember;
 
 	/**
 	 * Returns a generic and consistent mock of a Discord Client.
@@ -74,6 +78,32 @@ class BaseMocks {
 		}
 
 		return this.textChannel;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord User.
+	 *
+	 * @returns {Discord.User}
+	 */
+	static getUser(): Discord.User {
+		if (!this.user) {
+			this.user = new Discord.User(this.getClient(), USER_DEFAULTS);
+		}
+
+		return this.user;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Guild Member.
+	 *
+	 * @returns {Discord.GuildMember}
+	 */
+	static getGuildMember(): Discord.GuildMember {
+		if (!this.guildMember) {
+			this.guildMember = new Discord.GuildMember(this.getClient(), GUILD_MEMBER_DEFAULTS, this.getGuild());
+		}
+
+		return this.guildMember;
 	}
 }
 

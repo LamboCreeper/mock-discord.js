@@ -2,11 +2,13 @@ import { expect } from "chai";
 import BaseMocks from "../src/BaseMocks";
 import GUILD_DEFAULTS from "../src/defaults/guild";
 import CHANNEL_DEFAULTS from "../src/defaults/channel";
+import GUILD_CHANNEL_DEFAULTS from "../src/defaults/guildchannel";
+import TEXT_CHANNEL_DEFAULTS from "../src/defaults/textchannel";
+import USER_DEFAULTS from "../src/defaults/user";
 
 // @ts-ignore - TypeScript doesn't like that this file does not come from src/
 import { ExpicitContentFilterLevel, VerificationLevel, ChannelType } from "./enums";
-import GUILD_CHANNEL_DEFAULTS from "../src/defaults/guildchannel";
-import TEXT_CHANNEL_DEFAULTS from "../src/defaults/textchannel";
+import GUILD_MEMBER_DEFAULTS from "../src/defaults/guildmember";
 
 describe("BaseMocks", () => {
 	describe("::getClient()", () => {
@@ -110,6 +112,40 @@ describe("BaseMocks", () => {
 			expect(channel.lastMessageID).to.equal(TEXT_CHANNEL_DEFAULTS.last_message_id);
 			expect(channel.lastPinTimestamp).to.equal(TEXT_CHANNEL_DEFAULTS.last_pin_timestamp);
 			expect(channel.rateLimitPerUser).to.equal(TEXT_CHANNEL_DEFAULTS.rate_limit_per_user);
+		});
+	});
+
+	describe("::getUser()", () => {
+		it("returns the same Discord User each time", () => {
+			const expected = BaseMocks.getUser();
+			const actual = BaseMocks.getUser();
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("creates a new Discord User with the USER_DEFAULTS", () => {
+			const user = BaseMocks.getUser();
+
+			expect(user.id).to.equal(USER_DEFAULTS.id);
+			expect(user.username).to.equal(USER_DEFAULTS.username);
+			expect(user.discriminator).to.equal(USER_DEFAULTS.discriminator);
+			expect(user.bot).to.equal(USER_DEFAULTS.bot);
+		});
+	});
+
+	describe("::getGuildMember()", () => {
+		it("returns the same Discord Guild Member each time", () => {
+			const expected = BaseMocks.getGuildMember();
+			const actual = BaseMocks.getGuildMember();
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("creates a new Discord Guild Member with the GUILD_MEMBER_DEFAULTS", () => {
+			const member = BaseMocks.getGuildMember();
+
+			expect(member.nickname).to.equal(GUILD_MEMBER_DEFAULTS.nick);
+			expect(member.joinedTimestamp).to.equal(GUILD_MEMBER_DEFAULTS.joined_at);
 		});
 	});
 });
