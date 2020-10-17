@@ -5,10 +5,11 @@ import CHANNEL_DEFAULTS from "../src/defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "../src/defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "../src/defaults/textchannel";
 import USER_DEFAULTS from "../src/defaults/user";
+import getGuildMemberDefaults from "../src/defaults/guildmember";
+import getMessageDefaults from "../src/defaults/message";
 
 // @ts-ignore - TypeScript doesn't like that this file does not come from src/
 import { ExpicitContentFilterLevel, VerificationLevel, ChannelType } from "./enums";
-import GUILD_MEMBER_DEFAULTS from "../src/defaults/guildmember";
 
 describe("BaseMocks", () => {
 	describe("::getClient()", () => {
@@ -143,9 +144,32 @@ describe("BaseMocks", () => {
 
 		it("creates a new Discord Guild Member with the GUILD_MEMBER_DEFAULTS", () => {
 			const member = BaseMocks.getGuildMember();
+			const defaults = getGuildMemberDefaults();
 
-			expect(member.nickname).to.equal(GUILD_MEMBER_DEFAULTS.nick);
-			expect(member.joinedTimestamp).to.equal(GUILD_MEMBER_DEFAULTS.joined_at);
+			expect(member.nickname).to.equal(defaults.nick);
+			expect(member.joinedTimestamp).to.equal(defaults.joined_at);
+			expect(member.user.id).to.equal(BaseMocks.getUser().id);
+		});
+	});
+
+	describe("::getMessage()", () => {
+		it("returns the same Discord Message each time", () => {
+			const expected = BaseMocks.getMessage();
+			const actual = BaseMocks.getMessage();
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("creates a new Discord Message with the MESSAGE_DEFAULTS", () => {
+			const message = BaseMocks.getMessage();
+			const defaults = getMessageDefaults();
+
+			expect(message.id).to.equal(defaults.id);
+			expect(message.content).to.equal(defaults.content);
+			expect(message.author.id).to.equal(defaults.author?.id);
+			expect(message.member?.id).to.equal(defaults.member?.id);
+			expect(message.pinned).to.equal(defaults.pinned);
+			expect(message.tts).to.equal(defaults.tts);
 		});
 	});
 });

@@ -4,7 +4,8 @@ import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
-import GUILD_MEMBER_DEFAULTS from "./defaults/guildmember";
+import getGuildMemberDefaults from "./defaults/guildmember";
+import getMessageDefaults from "./defaults/message";
 
 class BaseMocks {
 	private static client: Discord.Client;
@@ -14,6 +15,7 @@ class BaseMocks {
 	private static textChannel: Discord.TextChannel;
 	private static user: Discord.User;
 	private static guildMember: Discord.GuildMember;
+	private static message: Discord.Message;
 
 	/**
 	 * Returns a generic and consistent mock of a Discord Client.
@@ -100,10 +102,23 @@ class BaseMocks {
 	 */
 	static getGuildMember(): Discord.GuildMember {
 		if (!this.guildMember) {
-			this.guildMember = new Discord.GuildMember(this.getClient(), GUILD_MEMBER_DEFAULTS, this.getGuild());
+			this.guildMember = new Discord.GuildMember(this.getClient(), getGuildMemberDefaults(), this.getGuild());
 		}
 
 		return this.guildMember;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Message.
+	 *
+	 * @returns {Discord.Message}
+	 */
+	static getMessage(): Discord.Message {
+		if (!this.message) {
+			this.message = new Discord.Message(this.getClient(), getMessageDefaults(), this.getTextChannel());
+		}
+
+		return this.message;
 	}
 }
 

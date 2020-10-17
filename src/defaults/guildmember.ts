@@ -1,8 +1,12 @@
 import GuildMemberConfigOptions from "../interfaces/GuildMemberConfigOptions";
+import BaseMocks from "../BaseMocks";
 
-const GUILD_MEMBER_DEFAULTS: GuildMemberConfigOptions = {
-	nick: "my name",
-	joined_at: new Date("2020-10-17").getTime()
-};
+function getGuildMemberDefaults(): GuildMemberConfigOptions {
+	return {
+		nick: "my name",
+		joined_at: new Date("2020-10-17").getTime(),
+		user: BaseMocks.getUser()
+	};
+}
 
-export default GUILD_MEMBER_DEFAULTS;
+export default getGuildMemberDefaults;
