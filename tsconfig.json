@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "strict": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "declaration": true
+  },
+  "exclude": ["./test"],
+  "typedocOptions": {
+    "out": "./docs",
+    "inputFiles": [
+      "./src/BaseMocks.ts",
+      "./src/defaults.guild.ts"
+    ]
+  }
+}
