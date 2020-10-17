@@ -11,3 +11,14 @@ export enum ExpicitContentFilterLevel {
 	"MEMBERS_WITHOUT_ROLES",
 	"ALL_MEMBERS"
 }
+
+export enum ChannelType {
+	"TEXT",
+	"DM",
+	"VOICE",
+	"GROUP",
+	"CATEGORY",
+	"NEWS",
+	"STORE",
+	"UNKNOWN"
+}

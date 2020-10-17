@@ -19,7 +19,7 @@ const GUILD_DEFAULTS: GuildConfigOptions = {
 	explicit_content_filter: 0,
 	mfa_level: 8,
 	joined_at: new Date("2020-10-16").getTime(),
-	owner_id: "182736451827364511",
+	owner_id: "182736451827364511"
 };
 
 export default GUILD_DEFAULTS;

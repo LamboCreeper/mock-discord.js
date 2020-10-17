@@ -1,9 +1,15 @@
 import Discord from "discord.js";
 import GUILD_DEFAULTS from "./defaults/guild";
+import CHANNEL_DEFAULTS from "./defaults/channel";
+import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
+import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 
 class BaseMocks {
 	private static client: Discord.Client;
 	private static guild: Discord.Guild;
+	private static channel: Discord.Channel;
+	private static guildChannel: Discord.GuildChannel;
+	private static textChannel: Discord.TextChannel;
 
 	/**
 	 * Returns a generic and consistent mock of a Discord Client.
@@ -29,6 +35,45 @@ class BaseMocks {
 		}
 
 		return this.guild;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Channel.
+	 *
+	 * @returns {Discord.Channel}
+	 */
+	static getChannel(): Discord.Channel {
+		if (!this.channel) {
+			this.channel = new Discord.Channel(this.getClient(), CHANNEL_DEFAULTS);
+		}
+
+		return this.channel;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Guild Channel.
+	 *
+	 * @returns {Discord.GuildChannel}
+	 */
+	static getGuildChannel(): Discord.GuildChannel {
+		if (!this.guildChannel) {
+			this.guildChannel = new Discord.GuildChannel(this.getGuild(), GUILD_CHANNEL_DEFAULTS);
+		}
+
+		return this.guildChannel;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Text Channel.
+	 *
+	 * @returns {Discord.TextChannel}
+	 */
+	static getTextChannel(): Discord.TextChannel {
+		if (!this.textChannel) {
+			this.textChannel = new Discord.TextChannel(this.getGuild(), TEXT_CHANNEL_DEFAULTS);
+		}
+
+		return this.textChannel;
 	}
 }
 
