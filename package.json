@@ -8,7 +8,8 @@
     "build": "tsc",
     "lint": "eslint src --ext .js,.ts",
     "test": "ts-mocha test/**/*Test.ts --exit",
-    "test:debug": "ts-mocha test/**/*Test.ts --timeout 999999999 --exit"
+    "test:debug": "ts-mocha test/**/*Test.ts --timeout 999999999 --exit",
+    "test:coverage": "nyc --reporter=lcov --reporter=text-summary npm test"
   },
   "repository": {
     "type": "git",
