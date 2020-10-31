@@ -107,7 +107,6 @@ describe("BaseMocks", () => {
 			expect(channel.deleted).to.equal(TEXT_CHANNEL_DEFAULTS.deleted);
 			expect(channel.name).to.equal(TEXT_CHANNEL_DEFAULTS.name);
 			expect(channel.parentID).to.equal(TEXT_CHANNEL_DEFAULTS.parent_id);
-			expect(channel.parentID).to.equal(TEXT_CHANNEL_DEFAULTS.parent_id);
 			expect(channel.topic).to.equal(TEXT_CHANNEL_DEFAULTS.topic);
 			expect(channel.nsfw).to.equal(TEXT_CHANNEL_DEFAULTS.nsfw);
 			expect(channel.lastMessageID).to.equal(TEXT_CHANNEL_DEFAULTS.last_message_id);
