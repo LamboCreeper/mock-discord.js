@@ -18,7 +18,6 @@ import getGuildMemberDefaults from "./defaults/guildmember";
 import getMessageDefaults from "./defaults/message";
 
 class CustomMocks {
-
 	/**
 	 * Returns a guild mock based off of given options.
 	 *

@@ -6,8 +6,8 @@ import CHANNEL_DEFAULTS from "../src/defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "../src/defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "../src/defaults/textchannel";
 import USER_DEFAULTS from "../src/defaults/user";
-import GUILD_MEMBER_DEFAULTS from "../build/defaults/guildmember";
-import MESSAGE_DEFAULTS from "../build/defaults/message";
+import getGuildMemberDefaults from "../src/defaults/guildmember";
+import getMessageDefaults from "../src/defaults/message";
 
 describe("CustomMocks", () => {
 	describe("::getGuild()", () => {
@@ -204,7 +204,7 @@ describe("CustomMocks", () => {
 			});
 
 			expect(member.nickname).to.equal("My Test Nickname");
-			expect(member.nickname).not.to.equal(GUILD_MEMBER_DEFAULTS.nick);
+			expect(member.nickname).not.to.equal(getGuildMemberDefaults().nick);
 		});
 	});
 
@@ -241,7 +241,7 @@ describe("CustomMocks", () => {
 			});
 
 			expect(message.content).to.equal("This is a test message");
-			expect(message.content).not.to.equal(MESSAGE_DEFAULTS.content);
+			expect(message.content).not.to.equal(getMessageDefaults().content);
 		});
 	});
 });
