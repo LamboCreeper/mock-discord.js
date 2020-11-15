@@ -16,6 +16,9 @@ import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
 import getGuildMemberDefaults from "./defaults/guildmember";
 import getMessageDefaults from "./defaults/message";
+import MessageReactionOptions from "./interfaces/MessageReactionOptions";
+import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
+import getMessageReactionDefaults from "./defaults/messagerReaction";
 
 class CustomMocks {
 	/**
@@ -100,6 +103,18 @@ class CustomMocks {
 			...getMessageDefaults(),
 			...options
 		}, extras?.channel ?? BaseMocks.getTextChannel());
+	}
+
+	/**
+	 * Returns a message reaction based off of given options.
+	 *
+	 * @returns {Discord.MessageReaction}
+	 */
+	static getMessageReaction(options?: MessageReactionOptions, extras?: CustomMessageReactionExtras): Discord.MessageReaction {
+		return new Discord.MessageReaction(extras?.client ?? BaseMocks.getClient(), {
+			...getMessageReactionDefaults(),
+			...options
+		}, extras?.message ?? BaseMocks.getMessage());
 	}
 }
 

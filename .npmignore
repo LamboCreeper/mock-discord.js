@@ -1,0 +1,7 @@
+.gitignore
+.nycrc
+test/
+coverage/
+.nyc_output/
+.github/
+.idea/

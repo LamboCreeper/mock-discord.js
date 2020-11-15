@@ -5,6 +5,7 @@ interface MessageConfigOptions {
 	content?: string;
 	author?: Discord.User;
 	member?: Discord.GuildMember;
+	guild?: Discord.Guild;
 	pinned?: false;
 	tts?: false;
 }

@@ -6,6 +6,7 @@ import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
 import getGuildMemberDefaults from "./defaults/guildmember";
 import getMessageDefaults from "./defaults/message";
+import getMessageReactionDefaults from "./defaults/messagerReaction";
 
 class BaseMocks {
 	private static client: Discord.Client;
@@ -16,6 +17,7 @@ class BaseMocks {
 	private static user: Discord.User;
 	private static guildMember: Discord.GuildMember;
 	private static message: Discord.Message;
+	private static messageReaction: Discord.MessageReaction;
 
 	/**
 	 * Returns a generic and consistent mock of a Discord Client.
@@ -119,6 +121,21 @@ class BaseMocks {
 		}
 
 		return this.message;
+	}
+
+	/**
+	 * Returns a generic and consistent mock of a Discord Message Reaction.
+	 *
+	 * @returns {Discord.MessageReaction}
+	 */
+	static getMessageReaction(): Discord.MessageReaction {
+		if (!this.messageReaction) {
+			this.messageReaction = new Discord.MessageReaction(
+				this.getClient(), getMessageReactionDefaults(), this.getMessage()
+			);
+		}
+
+		return this.messageReaction;
 	}
 }
 

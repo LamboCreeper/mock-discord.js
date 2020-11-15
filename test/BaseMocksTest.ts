@@ -10,6 +10,7 @@ import getMessageDefaults from "../src/defaults/message";
 
 // @ts-ignore - TypeScript doesn't like that this file does not come from src/
 import { ExpicitContentFilterLevel, VerificationLevel, ChannelType } from "./enums";
+import getMessageReactionDefaults from "../src/defaults/messagerReaction";
 
 describe("BaseMocks", () => {
 	describe("::getClient()", () => {
@@ -169,6 +170,23 @@ describe("BaseMocks", () => {
 			expect(message.member?.id).to.equal(defaults.member?.id);
 			expect(message.pinned).to.equal(defaults.pinned);
 			expect(message.tts).to.equal(defaults.tts);
+		});
+	});
+
+	describe("::getMessageReaction()", () => {
+		it("returns the same Discord Message Reaction each time", () => {
+			const expected = BaseMocks.getMessageReaction();
+			const actual = BaseMocks.getMessageReaction();
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("creates a new Message Reaction with the MESSAGE_REACTION_DEFAULTS", () => {
+			const reaction = BaseMocks.getMessageReaction();
+			const defaults = getMessageReactionDefaults();
+
+			expect(reaction.message).to.equal(defaults.message);
+			expect(reaction.emoji.name).to.equal(defaults.emoji.name);
 		});
 	});
 });
