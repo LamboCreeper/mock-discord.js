@@ -8,6 +8,7 @@ function getMessageDefaults(): MessageConfigOptions {
 		content: "This is a message.",
 		author: BaseMocks.getUser(),
 		member: BaseMocks.getGuildMember(),
+		guild: BaseMocks.getGuild(),
 		pinned: false,
 		tts: false
 	};

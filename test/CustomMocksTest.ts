@@ -8,6 +8,7 @@ import TEXT_CHANNEL_DEFAULTS from "../src/defaults/textchannel";
 import USER_DEFAULTS from "../src/defaults/user";
 import getGuildMemberDefaults from "../src/defaults/guildmember";
 import getMessageDefaults from "../src/defaults/message";
+import getMessageReactionDefaults from "../src/defaults/messagerReaction";
 
 describe("CustomMocks", () => {
 	describe("::getGuild()", () => {
@@ -217,6 +218,7 @@ describe("CustomMocks", () => {
 			expect(actual.content).to.equal(expected.content);
 			expect(actual.author.id).to.equal(expected.author.id);
 			expect(actual.member?.id).to.equal(expected.member?.id);
+			expect(actual.guild?.id).to.equal(expected.guild?.id);
 			expect(actual.pinned).to.equal(expected.pinned);
 			expect(actual.tts).to.equal(expected.tts);
 		});
@@ -242,6 +244,41 @@ describe("CustomMocks", () => {
 
 			expect(message.content).to.equal("This is a test message");
 			expect(message.content).not.to.equal(getMessageDefaults().content);
+		});
+	});
+
+	describe("::getMessageReaction()", () => {
+		it("returns a Discord Message Reaction with the default values if no options are provided", () => {
+			const expected = BaseMocks.getMessageReaction();
+			const actual = CustomMocks.getMessageReaction();
+
+			expect(actual.message).to.equal(expected.message);
+			expect(actual.emoji.name).to.equal(expected.emoji.name);
+		});
+
+		it("returns a Discord Message Reaction with the default client if no custom client is provided", () => {
+			const expected = BaseMocks.getClient();
+			const actual = CustomMocks.getMessageReaction().message.client;
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("returns a Discord Message Reaction with the default message if no custom message is provided", () => {
+			const expected = BaseMocks.getMessage();
+			const actual = CustomMocks.getMessageReaction().message;
+
+			expect(actual).to.equal(expected);
+		});
+
+		it("returns a Discord Message Reaction with the given options overriding the defaults", () => {
+			const message = CustomMocks.getMessageReaction({
+				emoji: {
+					name: "test"
+				}
+			});
+
+			expect(message.emoji.name).to.equal("test");
+			expect(message.emoji.name).not.to.equal(getMessageReactionDefaults().emoji.name);
 		});
 	});
 });
