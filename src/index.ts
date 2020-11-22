@@ -4,4 +4,4 @@ import CustomMocks from "./CustomMocks";
 export {
 	BaseMocks,
 	CustomMocks
-}
+};
