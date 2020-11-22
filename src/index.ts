@@ -1,2 +1,7 @@
-export * as BaseMocks from "./BaseMocks";
-export * as CustomMocks from "./CustomMocks";
+import BaseMocks from "./BaseMocks";
+import CustomMocks from "./CustomMocks";
+
+export {
+	BaseMocks,
+	CustomMocks
+};
