@@ -8,6 +8,20 @@ import getGuildMemberDefaults from "./defaults/guildmember";
 import getMessageDefaults from "./defaults/message";
 import getMessageReactionDefaults from "./defaults/messagerReaction";
 
+/**
+ * <h3>Overview</h3>
+ * BaseMocks allows you to easily mock parts of Discord.js by supplying a generic and consistent
+ * mock, this is useful for testing when you do not care about specific properties of a mocked instance.
+ *
+ * BaseMocks will always return the same instance, so do not modify them directly via the Discord.js SDK,
+ * otherwise all your instances will be updated too. I strongly recommend using {@link CustomMocks | CustomMocks}
+ * if you need to do that.
+ *
+ * You can start using BaseMocks via:
+ * ```ts
+ * import { BaseMocks } from "@lambocreeper/mock-discord.js";
+ * ```
+ */
 class BaseMocks {
 	private static client: Discord.Client;
 	private static guild: Discord.Guild;

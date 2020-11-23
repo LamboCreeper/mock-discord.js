@@ -20,7 +20,23 @@ import MessageReactionOptions from "./interfaces/MessageReactionOptions";
 import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
 import getMessageReactionDefaults from "./defaults/messagerReaction";
 
+/**
+ * <h3>Overview</h3>
+ * CustomMocks allows you to easily mock parts of Discord.js by only supplying the
+ * parameters you want to change, allowing you not to have to worry about all the
+ * other required parameters.
+ *
+ * You can start using CustomMocks via:
+ * ```ts
+ * import { CustomMocks } from "@lambocreeper/mock-discord.js";
+ * ```
+ *
+ * If you do not supply any parameters, a CustomMock will return a new instance of a mock
+ * using the BaseMock defaults (whereas a BaseMock would return the same instance over and
+ * over again).
+ */
 class CustomMocks {
+
 	/**
 	 * Returns a guild mock based off of given options.
 	 *

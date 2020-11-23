@@ -1,0 +1,10 @@
+{
+    "src": [
+        "./src/BaseMocks.ts",
+        "./src/CustomMocks.ts"
+    ],
+    "out": "docs",
+    "name": "Mock Discord.js",
+    "theme": "minimal",
+    "mode": "file"
+}

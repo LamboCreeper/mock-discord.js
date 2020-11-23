@@ -13,7 +13,8 @@
     "lint": "eslint src --ext .js,.ts",
     "test": "ts-mocha test/**/*Test.ts --exit",
     "test:debug": "ts-mocha test/**/*Test.ts --timeout 999999999 --exit",
-    "test:coverage": "nyc --reporter=lcov --reporter=text-summary npm test"
+    "test:coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
+    "docs": "typedoc"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "nyc": "^15.1.0",
     "sinon": "^9.2.1",
     "ts-mocha": "^7.0.0",
+    "typedoc": "^0.19.2",
     "typescript": "^4.0.3"
   },
   "dependencies": {
