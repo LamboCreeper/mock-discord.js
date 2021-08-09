@@ -1,17 +1,23 @@
-import MessageConfigOptions from "../interfaces/MessageConfigOptions";
-import BaseMocks from "../BaseMocks";
+import { APIMessage } from "discord-api-types/v9";
+import USER_DEFAULTS from "./user";
+import GUILD_MEMBER_DEFAULTS from "./guildmember";
 
-// This has to be declared like this otherwise an error occurs stating BaseMocks is not defined.
-function getMessageDefaults(): MessageConfigOptions {
-	return {
-		id: "123456123456123456",
-		content: "This is a message.",
-		author: BaseMocks.getUser(),
-		member: BaseMocks.getGuildMember(),
-		guild: BaseMocks.getGuild(),
-		pinned: false,
-		tts: false
-	};
-}
+const GUILD_MESSAGE_DEFAULTS: APIMessage = {
+	id: "123456123456123456",
+	channel_id: "121212121212121212",
+	content: "This is a message.",
+	author: USER_DEFAULTS,
+	member: GUILD_MEMBER_DEFAULTS,
+	pinned: false,
+	tts: false,
+	timestamp: '',
+	edited_timestamp: null,
+	mention_everyone: false,
+	mention_roles: [],
+	mentions: [],
+	attachments: [],
+	embeds: [],
+	type: 0
+};
 
-export default getMessageDefaults;
+export default GUILD_MESSAGE_DEFAULTS;

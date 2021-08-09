@@ -1,24 +1,17 @@
 import Discord from "discord.js";
 import BaseMocks from "./BaseMocks";
-import GuildConfigOptions from "./interfaces/GuildConfigOptions";
-import ChannelConfigOptions from "./interfaces/ChannelConfigOptions";
-import GuildChannelConfigOptions from "./interfaces/GuildChannelConfigOptions";
-import TextChannelConfigOptions from "./interfaces/TextChannelConfigOptions";
-import UserConfigOptions from "./interfaces/UserConfigOptions";
-import GuildMemberConfigOptions from "./interfaces/GuildMemberConfigOptions";
+import { APIChannel, APIGuild, APIGuildMember, APIMessage, APIReaction, APIUser } from "discord-api-types/v9";
 import CustomGuildMemberExtras from "./interfaces/CustomGuildMemberExtras";
-import MessageConfigOptions from "./interfaces/MessageConfigOptions";
 import CustomMessageExtras from "./interfaces/CustomMessageExtras";
+import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
 import GUILD_DEFAULTS from "./defaults/guild";
 import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
-import getGuildMemberDefaults from "./defaults/guildmember";
-import getMessageDefaults from "./defaults/message";
-import MessageReactionOptions from "./interfaces/MessageReactionOptions";
-import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
-import getMessageReactionDefaults from "./defaults/messagerReaction";
+import GUILD_MEMBER_DEFAULTS from "./defaults/guildmember";
+import GUILD_MESSAGE_DEFAULTS from "./defaults/message";
+import MESSAGE_REACTION_DEFAULTS from "./defaults/messagerReaction";
 
 class CustomMocks {
 	/**
@@ -26,7 +19,7 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.Guild}
 	 */
-	static getGuild(options?: GuildConfigOptions, client?: Discord.Client): Discord.Guild {
+	static getGuild(options?: Partial<APIGuild>, client?: Discord.Client): Discord.Guild {
 		return new Discord.Guild(client ?? BaseMocks.getClient(), {
 			...GUILD_DEFAULTS,
 			...options
@@ -38,7 +31,7 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.Channel}
 	 */
-	static getChannel(options?: ChannelConfigOptions, client?: Discord.Client): Discord.Channel {
+	static getChannel(options?: Partial<APIChannel>, client?: Discord.Client): Discord.Channel {
 		return new Discord.Channel(client ?? BaseMocks.getClient(), {
 			...CHANNEL_DEFAULTS,
 			...options
@@ -50,7 +43,7 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.GuildChannel}
 	 */
-	static getGuildChannel(options?: GuildChannelConfigOptions, guild?: Discord.Guild): Discord.GuildChannel {
+	static getGuildChannel(options?: Partial<APIChannel>, guild?: Discord.Guild): Discord.GuildChannel {
 		return new Discord.GuildChannel(guild ?? BaseMocks.getGuild(), {
 			...GUILD_CHANNEL_DEFAULTS,
 			...options
@@ -62,7 +55,7 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.TextChannel}
 	 */
-	static getTextChannel(options?: TextChannelConfigOptions, guild?: Discord.Guild): Discord.TextChannel {
+	static getTextChannel(options?: Partial<APIChannel>, guild?: Discord.Guild): Discord.TextChannel {
 		return new Discord.TextChannel(guild ?? BaseMocks.getGuild(), {
 			...TEXT_CHANNEL_DEFAULTS,
 			...options
@@ -74,7 +67,7 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.User}
 	 */
-	static getUser(options?: UserConfigOptions, client?: Discord.Client): Discord.User {
+	static getUser(options?: Partial<APIUser>, client?: Discord.Client): Discord.User {
 		return new Discord.User(client ?? BaseMocks.getClient(), {
 			...USER_DEFAULTS,
 			...options
@@ -86,9 +79,9 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.GuildMember}
 	 */
-	static getGuildMember(options?: GuildMemberConfigOptions, extras?: CustomGuildMemberExtras): Discord.GuildMember {
+	static getGuildMember(options?: Partial<APIGuildMember>, extras?: CustomGuildMemberExtras): Discord.GuildMember {
 		return new Discord.GuildMember(extras?.client ?? BaseMocks.getClient(), {
-			...getGuildMemberDefaults(),
+			...GUILD_MEMBER_DEFAULTS,
 			...options
 		}, extras?.guild ?? BaseMocks.getGuild());
 	}
@@ -98,11 +91,11 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.Message}
 	 */
-	static getMessage(options?: MessageConfigOptions, extras?: CustomMessageExtras): Discord.Message {
+	static getMessage(options?: Partial<APIMessage>, extras?: CustomMessageExtras): Discord.Message {
 		return new Discord.Message(extras?.client ?? BaseMocks.getClient(), {
-			...getMessageDefaults(),
+			...GUILD_MESSAGE_DEFAULTS,
 			...options
-		}, extras?.channel ?? BaseMocks.getTextChannel());
+		});
 	}
 
 	/**
@@ -110,9 +103,9 @@ class CustomMocks {
 	 *
 	 * @returns {Discord.MessageReaction}
 	 */
-	static getMessageReaction(options?: MessageReactionOptions, extras?: CustomMessageReactionExtras): Discord.MessageReaction {
+	static getMessageReaction(options?: Partial<APIReaction>, extras?: CustomMessageReactionExtras): Discord.MessageReaction {
 		return new Discord.MessageReaction(extras?.client ?? BaseMocks.getClient(), {
-			...getMessageReactionDefaults(),
+			...MESSAGE_REACTION_DEFAULTS,
 			...options
 		}, extras?.message ?? BaseMocks.getMessage());
 	}

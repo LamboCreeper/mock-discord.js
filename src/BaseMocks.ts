@@ -4,9 +4,9 @@ import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
-import getGuildMemberDefaults from "./defaults/guildmember";
-import getMessageDefaults from "./defaults/message";
-import getMessageReactionDefaults from "./defaults/messagerReaction";
+import GUILD_MEMBER_DEFAULTS from "./defaults/guildmember";
+import GUILD_MESSAGE_DEFAULTS from "./defaults/message";
+import MESSAGE_REACTION_DEFAULTS from "./defaults/messagerReaction";
 
 class BaseMocks {
 	private static client: Discord.Client;
@@ -26,7 +26,9 @@ class BaseMocks {
 	 */
 	static getClient(): Discord.Client {
 		if (!this.client) {
-			this.client = new Discord.Client();
+			this.client = new Discord.Client<true>({
+				intents: 10
+			});
 		}
 
 		return this.client;
@@ -104,7 +106,7 @@ class BaseMocks {
 	 */
 	static getGuildMember(): Discord.GuildMember {
 		if (!this.guildMember) {
-			this.guildMember = new Discord.GuildMember(this.getClient(), getGuildMemberDefaults(), this.getGuild());
+			this.guildMember = new Discord.GuildMember(this.getClient(), GUILD_MEMBER_DEFAULTS, this.getGuild());
 		}
 
 		return this.guildMember;
@@ -117,7 +119,7 @@ class BaseMocks {
 	 */
 	static getMessage(): Discord.Message {
 		if (!this.message) {
-			this.message = new Discord.Message(this.getClient(), getMessageDefaults(), this.getTextChannel());
+			this.message = new Discord.Message(this.getClient(), GUILD_MESSAGE_DEFAULTS);
 		}
 
 		return this.message;
@@ -131,7 +133,7 @@ class BaseMocks {
 	static getMessageReaction(): Discord.MessageReaction {
 		if (!this.messageReaction) {
 			this.messageReaction = new Discord.MessageReaction(
-				this.getClient(), getMessageReactionDefaults(), this.getMessage()
+				this.getClient(), MESSAGE_REACTION_DEFAULTS, this.getMessage()
 			);
 		}
 
