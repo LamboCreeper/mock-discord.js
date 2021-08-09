@@ -87,6 +87,9 @@ var CustomMocks = /** @class */ (function () {
         Object.defineProperty(message, 'channel', {
             get: function () { var _a; return (_a = extras === null || extras === void 0 ? void 0 : extras.channel) !== null && _a !== void 0 ? _a : BaseMocks_1.default.getTextChannel(); }
         });
+        Object.defineProperty(message, 'member', {
+            get: function () { var _a; return (_a = extras === null || extras === void 0 ? void 0 : extras.member) !== null && _a !== void 0 ? _a : BaseMocks_1.default.getGuildMember(); }
+        });
         return message;
     };
     /**

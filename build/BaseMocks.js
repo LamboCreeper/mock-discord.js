@@ -106,6 +106,9 @@ var BaseMocks = /** @class */ (function () {
             Object.defineProperty(this.message, 'channel', {
                 get: function () { return _this.getTextChannel(); }
             });
+            Object.defineProperty(this.message, 'member', {
+                get: function () { return _this.getGuildMember(); }
+            });
         }
         return this.message;
     };

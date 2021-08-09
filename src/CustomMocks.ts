@@ -101,6 +101,10 @@ class CustomMocks {
 			get:() => extras?.channel ?? BaseMocks.getTextChannel()
 		})
 
+		Object.defineProperty(message, 'member', {
+			get:() => extras?.member ?? BaseMocks.getGuildMember()
+		})
+
 		return message;
 	}
 

@@ -124,6 +124,10 @@ class BaseMocks {
 			Object.defineProperty(this.message, 'channel', {
 				get:() => this.getTextChannel()
 			})
+
+			Object.defineProperty(this.message, 'member', {
+				get:() => this.getGuildMember()
+			})
 		}
 
 		return this.message;
