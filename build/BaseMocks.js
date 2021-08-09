@@ -100,8 +100,12 @@ var BaseMocks = /** @class */ (function () {
      * @returns {Discord.Message}
      */
     BaseMocks.getMessage = function () {
+        var _this = this;
         if (!this.message) {
             this.message = new discord_js_1.default.Message(this.getClient(), message_1.default);
+            Object.defineProperty(this.message, 'channel', {
+                get: function () { return _this.getTextChannel(); }
+            });
         }
         return this.message;
     };

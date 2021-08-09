@@ -92,10 +92,16 @@ class CustomMocks {
 	 * @returns {Discord.Message}
 	 */
 	static getMessage(options?: Partial<APIMessage>, extras?: CustomMessageExtras): Discord.Message {
-		return new Discord.Message(extras?.client ?? BaseMocks.getClient(), {
+		const message = new Discord.Message(extras?.client ?? BaseMocks.getClient(), {
 			...GUILD_MESSAGE_DEFAULTS,
 			...options
 		});
+
+		Object.defineProperty(message, 'channel', {
+			get:() => extras?.channel ?? BaseMocks.getTextChannel()
+		})
+
+		return message;
 	}
 
 	/**

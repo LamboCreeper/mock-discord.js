@@ -83,7 +83,11 @@ var CustomMocks = /** @class */ (function () {
      */
     CustomMocks.getMessage = function (options, extras) {
         var _a;
-        return new discord_js_1.default.Message((_a = extras === null || extras === void 0 ? void 0 : extras.client) !== null && _a !== void 0 ? _a : BaseMocks_1.default.getClient(), __assign(__assign({}, message_1.default), options));
+        var message = new discord_js_1.default.Message((_a = extras === null || extras === void 0 ? void 0 : extras.client) !== null && _a !== void 0 ? _a : BaseMocks_1.default.getClient(), __assign(__assign({}, message_1.default), options));
+        Object.defineProperty(message, 'channel', {
+            get: function () { var _a; return (_a = extras === null || extras === void 0 ? void 0 : extras.channel) !== null && _a !== void 0 ? _a : BaseMocks_1.default.getTextChannel(); }
+        });
+        return message;
     };
     /**
      * Returns a message reaction based off of given options.

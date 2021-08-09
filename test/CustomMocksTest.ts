@@ -226,14 +226,12 @@ describe.only("CustomMocks", () => {
 			expect(actual).to.equal(expected);
 		});
 
-		// it.only("returns a Discord Message with the default text channel if no custom text channel is provided", () => {
-		// 	const expected = BaseMocks.getTextChannel();
-		// 	const actual = CustomMocks.getMessage().channel;
-        //
-		// 	console.log(actual);
-        //
-		// 	expect(actual).to.equal(expected);
-		// });
+		it("returns a Discord Message with the default text channel if no custom text channel is provided", () => {
+			const expected = BaseMocks.getTextChannel();
+			const actual = CustomMocks.getMessage().channel;
+
+			expect(actual).to.equal(expected);
+		});
 
 		it("returns a Discord Message with the given options overriding the defaults", () => {
 			const message = CustomMocks.getMessage({

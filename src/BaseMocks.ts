@@ -120,6 +120,10 @@ class BaseMocks {
 	static getMessage(): Discord.Message {
 		if (!this.message) {
 			this.message = new Discord.Message(this.getClient(), GUILD_MESSAGE_DEFAULTS);
+
+			Object.defineProperty(this.message, 'channel', {
+				get:() => this.getTextChannel()
+			})
 		}
 
 		return this.message;
