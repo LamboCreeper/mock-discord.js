@@ -1,14 +1,12 @@
-import MessageReactionOptions from "../interfaces/MessageReactionOptions";
-import BaseMocks from "../BaseMocks";
+import { APIReaction } from "discord-api-types/v9";
 
-// This has to be declared like this otherwise an error occurs stating BaseMocks is not defined.
-function getMessageReactionDefaults(): MessageReactionOptions {
-	return {
-		message: BaseMocks.getMessage(),
-		emoji: {
-			name: "my-emoji"
-		}
-	};
+const MESSAGE_REACTION_DEFAULTS: APIReaction = {
+	me: false,
+	count: 1,
+	emoji: {
+		id: null,
+		name: "my-emoji"
+	}
 }
 
-export default getMessageReactionDefaults;
+export default MESSAGE_REACTION_DEFAULTS;

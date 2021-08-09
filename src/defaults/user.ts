@@ -1,6 +1,6 @@
-import UserConfigOptions from "../interfaces/UserConfigOptions";
+import { APIUser } from "discord-api-types/v9";
 
-const USER_DEFAULTS: UserConfigOptions = {
+const USER_DEFAULTS: APIUser = {
 	id: "010101010101010101",
 	username: "my-username",
 	discriminator: "1234",

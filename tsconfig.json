@@ -12,7 +12,7 @@
     "noUnusedLocals": true,
     "declaration": true
   },
-  "exclude": ["./test"],
+  "exclude": ["./test", "./build"],
   "typedocOptions": {
     "out": "./docs",
     "inputFiles": [
