@@ -6,7 +6,7 @@ const TEXT_CHANNEL_DEFAULTS: APIChannel = {
 	topic: "some-topic",
 	nsfw: false,
 	last_message_id: "123212321232123212",
-	rate_limit_per_user: 0,
+	rate_limit_per_user: 0
 };
 
 export default TEXT_CHANNEL_DEFAULTS;

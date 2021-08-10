@@ -7,6 +7,6 @@ const MESSAGE_REACTION_DEFAULTS: APIReaction = {
 		id: null,
 		name: "my-emoji"
 	}
-}
+};
 
 export default MESSAGE_REACTION_DEFAULTS;

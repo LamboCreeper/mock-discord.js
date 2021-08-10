@@ -126,13 +126,13 @@ class BaseMocks {
 			 * based on IDs which are stored on the client - since we're mocking
 			 * the client there will be no IDs, so overwrite these getters
 			 */
-			Object.defineProperty(this.message, 'channel', {
-				get:() => this.getTextChannel()
-			})
+			Object.defineProperty(this.message, "channel", {
+				get: () => this.getTextChannel()
+			});
 
-			Object.defineProperty(this.message, 'member', {
-				get:() => this.getGuildMember()
-			})
+			Object.defineProperty(this.message, "member", {
+				get: () => this.getGuildMember()
+			});
 		}
 
 		return this.message;

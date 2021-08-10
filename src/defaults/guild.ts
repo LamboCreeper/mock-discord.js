@@ -23,13 +23,13 @@ const GUILD_DEFAULTS: APIGuild = {
 	roles: [],
 	emojis: [],
 	system_channel_flags: 1,
-	rules_channel_id: '',
-	vanity_url_code: '',
-	description: '',
+	rules_channel_id: "",
+	vanity_url_code: "",
+	description: "",
 	banner: null,
 	premium_tier: GuildPremiumTier.None,
-	preferred_locale: '',
-	public_updates_channel_id: '',
+	preferred_locale: "",
+	public_updates_channel_id: "",
 	nsfw_level: GuildNSFWLevel.Default,
 	stickers: []
 };

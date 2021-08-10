@@ -10,7 +10,7 @@ const GUILD_MESSAGE_DEFAULTS: APIMessage = {
 	member: GUILD_MEMBER_DEFAULTS,
 	pinned: false,
 	tts: false,
-	timestamp: '',
+	timestamp: "",
 	edited_timestamp: null,
 	mention_everyone: false,
 	mention_roles: [],

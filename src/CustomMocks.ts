@@ -102,13 +102,13 @@ class CustomMocks {
 		 * based on IDs which are stored on the client - since we're mocking
 		 * the client there will be no IDs, so overwrite these getters
 		 */
-		Object.defineProperty(message, 'channel', {
-			get:() => extras?.channel ?? BaseMocks.getTextChannel()
-		})
+		Object.defineProperty(message, "channel", {
+			get: () => extras?.channel ?? BaseMocks.getTextChannel()
+		});
 
-		Object.defineProperty(message, 'member', {
-			get:() => extras?.member ?? BaseMocks.getGuildMember()
-		})
+		Object.defineProperty(message, "member", {
+			get: () => extras?.member ?? BaseMocks.getGuildMember()
+		});
 
 		return message;
 	}
