@@ -1,4 +1,3 @@
-// import ChannelConfigOptions from "../interfaces/ChannelConfigOptions";
 import { APIChannel } from "discord-api-types/v9";
 
 

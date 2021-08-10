@@ -97,6 +97,11 @@ class CustomMocks {
 			...options
 		});
 
+		/**
+		 * Both channel and member are "getter" methods that resolve to objects
+		 * based on IDs which are stored on the client - since we're mocking
+		 * the client there will be no IDs, so overwrite these getters
+		 */
 		Object.defineProperty(message, 'channel', {
 			get:() => extras?.channel ?? BaseMocks.getTextChannel()
 		})

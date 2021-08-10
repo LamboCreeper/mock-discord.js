@@ -121,6 +121,11 @@ class BaseMocks {
 		if (!this.message) {
 			this.message = new Discord.Message(this.getClient(), GUILD_MESSAGE_DEFAULTS);
 
+			/**
+			 * Both channel and member are "getter" methods that resolve to objects
+			 * based on IDs which are stored on the client - since we're mocking
+			 * the client there will be no IDs, so overwrite these getters
+			 */
 			Object.defineProperty(this.message, 'channel', {
 				get:() => this.getTextChannel()
 			})
