@@ -1,12 +1,13 @@
-import GuildMemberConfigOptions from "../interfaces/GuildMemberConfigOptions";
-import BaseMocks from "../BaseMocks";
+import { APIGuildMember } from "discord-api-types/v9";
+import USER_DEFAULTS from "./user";
 
-function getGuildMemberDefaults(): GuildMemberConfigOptions {
-	return {
-		nick: "my name",
-		joined_at: new Date("2020-10-17").getTime(),
-		user: BaseMocks.getUser()
-	};
-}
+const GUILD_MEMBER_DEFAULTS: APIGuildMember = {
+	user: USER_DEFAULTS,
+	nick: "my name",
+	roles: [],
+	joined_at: "",
+	deaf: false,
+	mute: false
+};
 
-export default getGuildMemberDefaults;
+export default GUILD_MEMBER_DEFAULTS;

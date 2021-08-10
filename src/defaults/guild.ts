@@ -1,6 +1,6 @@
-import GuildConfigOptions from "../interfaces/GuildConfigOptions";
+import { APIGuild, GuildNSFWLevel, GuildPremiumTier } from "discord-api-types/v9";
 
-const GUILD_DEFAULTS: GuildConfigOptions = {
+const GUILD_DEFAULTS: APIGuild = {
 	id: "123456789012345678",
 	unavailable: false,
 	name: "My Guild",
@@ -14,12 +14,24 @@ const GUILD_DEFAULTS: GuildConfigOptions = {
 	afk_timeout: 1000,
 	afk_channel_id: "123412341234123412",
 	system_channel_id: "876587658765876587",
-	embed_enabled: true,
 	verification_level: 1,
 	explicit_content_filter: 0,
-	mfa_level: 8,
-	joined_at: new Date("2020-10-16").getTime(),
-	owner_id: "182736451827364511"
+	mfa_level: 0,
+	owner_id: "182736451827364511",
+	discovery_splash: null,
+	default_message_notifications: 0,
+	roles: [],
+	emojis: [],
+	system_channel_flags: 1,
+	rules_channel_id: "",
+	vanity_url_code: "",
+	description: "",
+	banner: null,
+	premium_tier: GuildPremiumTier.None,
+	preferred_locale: "",
+	public_updates_channel_id: "",
+	nsfw_level: GuildNSFWLevel.Default,
+	stickers: []
 };
 
 export default GUILD_DEFAULTS;
