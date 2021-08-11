@@ -5,7 +5,7 @@ const GUILD_MEMBER_DEFAULTS: APIGuildMember = {
 	user: USER_DEFAULTS,
 	nick: "my name",
 	roles: [],
-	joined_at: (new Date()).toISOString(),
+	joined_at: new Date().toISOString(),
 	deaf: false,
 	mute: false
 };

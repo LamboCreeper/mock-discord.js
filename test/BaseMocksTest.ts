@@ -30,7 +30,6 @@ describe("BaseMocks", () => {
 			expect(actual).to.equal(expected);
 		});
 
-
 		it("creates a new Discord Guild with the GUILD_DEFAULTS", () => {
 			const guild = BaseMocks.getGuild();
 
@@ -48,7 +47,7 @@ describe("BaseMocks", () => {
 			expect(guild.systemChannelId).to.equal(GUILD_DEFAULTS.system_channel_id);
 			expect(guild.verificationLevel).to.equal(VerificationLevel[GUILD_DEFAULTS.verification_level!]);
 			expect(guild.explicitContentFilter).to.equal(ExpicitContentFilterLevel[GUILD_DEFAULTS.explicit_content_filter!]);
-			expect(guild.mfaLevel).to.equal('NONE');
+			expect(guild.mfaLevel).to.equal("NONE");
 			expect(guild.ownerId).to.equal(GUILD_DEFAULTS.owner_id);
 		});
 	});
