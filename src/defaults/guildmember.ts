@@ -1,4 +1,4 @@
-import { APIGuildMember } from "discord-api-types/v9";
+import { APIGuildMember } from "discord-api-types/v10";
 import USER_DEFAULTS from "./user";
 
 const GUILD_MEMBER_DEFAULTS: APIGuildMember = {

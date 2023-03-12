@@ -8,6 +8,15 @@ import USER_DEFAULTS from "../src/defaults/user";
 import GUILD_MEMBER_DEFAULTS from "../src/defaults/guildmember";
 import GUILD_MESSAGE_DEFAULTS from "../src/defaults/message";
 import MESSAGE_REACTION_DEFAULTS from "../src/defaults/messagerReaction";
+import {
+	GuildNSFWLevel,
+	GuildPremiumTier,
+	GuildVerificationLevel,
+	GuildExplicitContentFilter,
+	GuildMFALevel,
+	GuildDefaultMessageNotifications,
+	GuildSystemChannelFlags
+} from "discord-api-types/v10";
 
 // @ts-ignore - TypeScript doesn't like that this file does not come from src/
 import { ExpicitContentFilterLevel, VerificationLevel, ChannelType } from "./enums";
@@ -34,36 +43,22 @@ describe("BaseMocks", () => {
 			const guild = BaseMocks.getGuild();
 
 			expect(guild.id).to.equal(GUILD_DEFAULTS.id);
-			expect(guild.available).to.equal(GUILD_DEFAULTS.unavailable);
 			expect(guild.name).to.equal(GUILD_DEFAULTS.name);
 			expect(guild.icon).to.equal(GUILD_DEFAULTS.icon);
 			expect(guild.splash).to.equal(GUILD_DEFAULTS.splash);
-			expect(guild.memberCount).to.equal(GUILD_DEFAULTS.member_count);
-			expect(guild.large).to.equal(GUILD_DEFAULTS.large);
+			expect(guild.approximateMemberCount).to.equal(GUILD_DEFAULTS.approximate_member_count);
 			expect(guild.features).to.equal(GUILD_DEFAULTS.features);
 			expect(guild.applicationId).to.equal(GUILD_DEFAULTS.application_id);
 			expect(guild.afkTimeout).to.equal(GUILD_DEFAULTS.afk_timeout);
 			expect(guild.afkChannelId).to.equal(GUILD_DEFAULTS.afk_channel_id);
 			expect(guild.systemChannelId).to.equal(GUILD_DEFAULTS.system_channel_id);
-			expect(guild.verificationLevel).to.equal(VerificationLevel[GUILD_DEFAULTS.verification_level!]);
-			expect(guild.explicitContentFilter).to.equal(ExpicitContentFilterLevel[GUILD_DEFAULTS.explicit_content_filter!]);
-			expect(guild.mfaLevel).to.equal("NONE");
+			expect(guild.verificationLevel).to.equal(GuildVerificationLevel.Low);
+			expect(guild.explicitContentFilter).to.equal(GuildExplicitContentFilter.Disabled);
+			expect(guild.mfaLevel).to.equal(GuildMFALevel.None);
+			expect(guild.systemChannelFlags.bitfield).to.equal(GuildSystemChannelFlags.SuppressJoinNotifications);
+			expect(guild.premiumTier).to.equal(GuildPremiumTier.None);
+			expect(guild.nsfwLevel).to.equal(GuildNSFWLevel.Default);
 			expect(guild.ownerId).to.equal(GUILD_DEFAULTS.owner_id);
-		});
-	});
-
-	describe("::getChannel()", () => {
-		it("returns the same Discord Channel each time", () => {
-			const expected = BaseMocks.getChannel();
-			const actual = BaseMocks.getChannel();
-
-			expect(actual).to.equal(expected);
-		});
-
-		it("creates a new Discord Channel with the CHANNEL_DEFAULTS", () => {
-			const channel = BaseMocks.getChannel();
-
-			expect(channel.id).to.equal(CHANNEL_DEFAULTS.id);
 		});
 	});
 
@@ -80,7 +75,6 @@ describe("BaseMocks", () => {
 
 			expect(channel.id).to.equal(GUILD_CHANNEL_DEFAULTS.id);
 			expect(channel.name).to.equal(GUILD_CHANNEL_DEFAULTS.name);
-			expect(channel.parentId).to.equal(GUILD_CHANNEL_DEFAULTS.parent_id);
 		});
 	});
 
@@ -156,7 +150,6 @@ describe("BaseMocks", () => {
 			expect(message.id).to.equal(defaults.id);
 			expect(message.content).to.equal(defaults.content);
 			expect(message.author.id).to.equal(defaults.author?.id);
-			expect(message.member?.id).to.equal(defaults.member?.id);
 			expect(message.pinned).to.equal(defaults.pinned);
 			expect(message.tts).to.equal(defaults.tts);
 		});

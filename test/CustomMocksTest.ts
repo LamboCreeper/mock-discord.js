@@ -10,7 +10,7 @@ import GUILD_MEMBER_DEFAULTS from "../src/defaults/guildmember";
 import GUILD_MESSAGE_DEFAULTS from "../src/defaults/message";
 import MESSAGE_REACTION_DEFAULTS from "../src/defaults/messagerReaction";
 
-describe.only("CustomMocks", () => {
+describe("CustomMocks", () => {
 	describe("::getGuild()", () => {
 		it("returns a Discord Guild with the default values if no options are provided", () => {
 			const expected = BaseMocks.getGuild();
@@ -51,34 +51,6 @@ describe.only("CustomMocks", () => {
 		});
 	});
 
-	describe("::getChannel()", () => {
-		it("returns a Discord Channel with the default values if no options are provided", () => {
-			const expected = BaseMocks.getChannel();
-			const actual = CustomMocks.getChannel();
-
-			expect(actual.client).to.equal(expected.client);
-			expect(actual.id).to.equal(expected.id);
-			expect(actual.type).to.equal(expected.type);
-			expect(actual.deleted).to.equal(expected.deleted);
-		});
-
-		it("returns a Discord Channel with the default client if no custom client is provided", () => {
-			const expected = BaseMocks.getClient();
-			const actual = CustomMocks.getChannel().client;
-
-			expect(actual).to.equal(expected);
-		});
-
-		it("returns a Discord Channel with your given options overriding the defaults", () => {
-			const channel = CustomMocks.getChannel({
-				id: "123"
-			});
-
-			expect(channel.id).to.equal("123");
-			expect(channel.id).not.to.equal(CHANNEL_DEFAULTS.id);
-		});
-	});
-
 	describe("::getGuildChannel()", () => {
 		it("returns a Discord Guild Channel with the default values if no options are provided", () => {
 			const expected = BaseMocks.getGuildChannel();
@@ -87,9 +59,8 @@ describe.only("CustomMocks", () => {
 			expect(actual.client).to.equal(expected.client);
 			expect(actual.id).to.equal(expected.id);
 			expect(actual.type).to.equal(expected.type);
-			expect(actual.deleted).to.equal(expected.deleted);
 			expect(actual.name).to.equal(expected.name);
-			expect(actual.parentID).to.equal(expected.parentID);
+			expect(actual.parentId).to.equal(expected.parentId);
 		});
 
 		it("returns a Discord Guild Channel with the default guild if no custom guild is provided", () => {
@@ -117,12 +88,11 @@ describe.only("CustomMocks", () => {
 			expect(actual.guild).to.equal(expected.guild);
 			expect(actual.id).to.equal(expected.id);
 			expect(actual.type).to.equal(expected.type);
-			expect(actual.deleted).to.equal(expected.deleted);
 			expect(actual.name).to.equal(expected.name);
-			expect(actual.parentID).to.equal(expected.parentID);
+			expect(actual.parentId).to.equal(expected.parentId);
 			expect(actual.topic).to.equal(expected.topic);
 			expect(actual.nsfw).to.equal(expected.nsfw);
-			expect(actual.lastMessageID).to.equal(expected.lastMessageID);
+			expect(actual.lastMessageId).to.equal(expected.lastMessageId);
 			expect(actual.lastPinTimestamp).to.equal(expected.lastPinTimestamp);
 			expect(actual.rateLimitPerUser).to.equal(expected.rateLimitPerUser);
 		});
@@ -269,7 +239,7 @@ describe.only("CustomMocks", () => {
 		it("returns a Discord Message Reaction with the given options overriding the defaults", () => {
 			const message = CustomMocks.getMessageReaction({
 				emoji: {
-				    id: null,
+					id: null,
 					name: "test"
 				}
 			});

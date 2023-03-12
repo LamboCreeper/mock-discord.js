@@ -1,6 +1,5 @@
 import Discord from "discord.js";
 import GUILD_DEFAULTS from "./defaults/guild";
-import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
@@ -11,7 +10,6 @@ import MESSAGE_REACTION_DEFAULTS from "./defaults/messagerReaction";
 class BaseMocks {
 	private static client: Discord.Client;
 	private static guild: Discord.Guild;
-	private static channel: Discord.Channel;
 	private static guildChannel: Discord.GuildChannel;
 	private static textChannel: Discord.TextChannel;
 	private static user: Discord.User;
@@ -41,23 +39,10 @@ class BaseMocks {
 	 */
 	static getGuild(): Discord.Guild {
 		if (!this.guild) {
-			this.guild = new Discord.Guild(this.getClient(), GUILD_DEFAULTS);
+			this.guild = Reflect.construct(Discord.Guild, [this.getClient(), GUILD_DEFAULTS]);
 		}
 
 		return this.guild;
-	}
-
-	/**
-	 * Returns a generic and consistent mock of a Discord Channel.
-	 *
-	 * @returns {Discord.Channel}
-	 */
-	static getChannel(): Discord.Channel {
-		if (!this.channel) {
-			this.channel = new Discord.Channel(this.getClient(), CHANNEL_DEFAULTS);
-		}
-
-		return this.channel;
 	}
 
 	/**
@@ -67,7 +52,7 @@ class BaseMocks {
 	 */
 	static getGuildChannel(): Discord.GuildChannel {
 		if (!this.guildChannel) {
-			this.guildChannel = new Discord.GuildChannel(this.getGuild(), GUILD_CHANNEL_DEFAULTS);
+			this.guildChannel = Reflect.construct(Discord.GuildChannel, [this.getGuild(), GUILD_CHANNEL_DEFAULTS]);
 		}
 
 		return this.guildChannel;
@@ -80,7 +65,7 @@ class BaseMocks {
 	 */
 	static getTextChannel(): Discord.TextChannel {
 		if (!this.textChannel) {
-			this.textChannel = new Discord.TextChannel(this.getGuild(), TEXT_CHANNEL_DEFAULTS);
+			this.textChannel = Reflect.construct(Discord.TextChannel, [this.getGuild(), TEXT_CHANNEL_DEFAULTS]);
 		}
 
 		return this.textChannel;
@@ -93,7 +78,7 @@ class BaseMocks {
 	 */
 	static getUser(): Discord.User {
 		if (!this.user) {
-			this.user = new Discord.User(this.getClient(), USER_DEFAULTS);
+			this.user = Reflect.construct(Discord.User, [this.getClient(), USER_DEFAULTS]);
 		}
 
 		return this.user;
@@ -106,7 +91,7 @@ class BaseMocks {
 	 */
 	static getGuildMember(): Discord.GuildMember {
 		if (!this.guildMember) {
-			this.guildMember = new Discord.GuildMember(this.getClient(), GUILD_MEMBER_DEFAULTS, this.getGuild());
+			this.guildMember = Reflect.construct(Discord.GuildMember, [this.getClient(), GUILD_MEMBER_DEFAULTS, this.getGuild()]);
 		}
 
 		return this.guildMember;
@@ -119,7 +104,7 @@ class BaseMocks {
 	 */
 	static getMessage(): Discord.Message {
 		if (!this.message) {
-			this.message = new Discord.Message(this.getClient(), GUILD_MESSAGE_DEFAULTS);
+			this.message = Reflect.construct(Discord.Message, [this.getClient(), GUILD_MESSAGE_DEFAULTS]);
 
 			/**
 			 * Both channel and member are "getter" methods that resolve to objects
@@ -145,9 +130,7 @@ class BaseMocks {
 	 */
 	static getMessageReaction(): Discord.MessageReaction {
 		if (!this.messageReaction) {
-			this.messageReaction = new Discord.MessageReaction(
-				this.getClient(), MESSAGE_REACTION_DEFAULTS, this.getMessage()
-			);
+			this.messageReaction = Reflect.construct(Discord.MessageReaction, [this.getClient(), MESSAGE_REACTION_DEFAULTS, this.getMessage()]);
 		}
 
 		return this.messageReaction;
