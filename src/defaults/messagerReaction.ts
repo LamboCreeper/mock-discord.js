@@ -1,4 +1,4 @@
-import { APIReaction } from "discord-api-types/v9";
+import { APIReaction } from "discord-api-types/v10";
 
 const MESSAGE_REACTION_DEFAULTS: APIReaction = {
 	me: false,

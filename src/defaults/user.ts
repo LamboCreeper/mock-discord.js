@@ -1,4 +1,4 @@
-import { APIUser } from "discord-api-types/v9";
+import { APIUser } from "discord-api-types/v10";
 
 const USER_DEFAULTS: APIUser = {
 	id: "010101010101010101",

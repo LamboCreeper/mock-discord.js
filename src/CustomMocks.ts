@@ -1,11 +1,10 @@
 import Discord from "discord.js";
 import BaseMocks from "./BaseMocks";
-import { APIChannel, APIGuild, APIGuildMember, APIMessage, APIReaction, APIUser } from "discord-api-types/v9";
+import { APIChannel, APIGuild, APIGuildMember, APIMessage, APIReaction, APIUser } from "discord-api-types/v10";
 import CustomGuildMemberExtras from "./interfaces/CustomGuildMemberExtras";
 import CustomMessageExtras from "./interfaces/CustomMessageExtras";
 import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
 import GUILD_DEFAULTS from "./defaults/guild";
-import CHANNEL_DEFAULTS from "./defaults/channel";
 import GUILD_CHANNEL_DEFAULTS from "./defaults/guildchannel";
 import TEXT_CHANNEL_DEFAULTS from "./defaults/textchannel";
 import USER_DEFAULTS from "./defaults/user";
@@ -20,22 +19,10 @@ class CustomMocks {
 	 * @returns {Discord.Guild}
 	 */
 	static getGuild(options?: Partial<APIGuild>, client?: Discord.Client): Discord.Guild {
-		return new Discord.Guild(client ?? BaseMocks.getClient(), {
-			...GUILD_DEFAULTS,
-			...options
-		});
-	}
+		const discordClient = client ?? BaseMocks.getClient();
+		const data = { ...GUILD_DEFAULTS, ...options };
 
-	/**
-	 * Returns a channel mock based off of given options.
-	 *
-	 * @returns {Discord.Channel}
-	 */
-	static getChannel(options?: Partial<APIChannel>, client?: Discord.Client): Discord.Channel {
-		return new Discord.Channel(client ?? BaseMocks.getClient(), {
-			...CHANNEL_DEFAULTS,
-			...options
-		});
+		return Reflect.construct(Discord.Guild, [discordClient, data]);
 	}
 
 	/**
@@ -44,10 +31,10 @@ class CustomMocks {
 	 * @returns {Discord.GuildChannel}
 	 */
 	static getGuildChannel(options?: Partial<APIChannel>, guild?: Discord.Guild): Discord.GuildChannel {
-		return new Discord.GuildChannel(guild ?? BaseMocks.getGuild(), {
-			...GUILD_CHANNEL_DEFAULTS,
-			...options
-		});
+		const discordGuild = guild ?? BaseMocks.getGuild();
+		const data = { ...GUILD_CHANNEL_DEFAULTS, ...options };
+
+		return Reflect.construct(Discord.GuildChannel, [discordGuild, data]);
 	}
 
 	/**
@@ -56,10 +43,10 @@ class CustomMocks {
 	 * @returns {Discord.TextChannel}
 	 */
 	static getTextChannel(options?: Partial<APIChannel>, guild?: Discord.Guild): Discord.TextChannel {
-		return new Discord.TextChannel(guild ?? BaseMocks.getGuild(), {
-			...TEXT_CHANNEL_DEFAULTS,
-			...options
-		});
+		const discordGuild = guild ?? BaseMocks.getGuild();
+		const data = { ...TEXT_CHANNEL_DEFAULTS, ...options };
+
+		return Reflect.construct(Discord.TextChannel, [discordGuild, data]);
 	}
 
 	/**
@@ -68,10 +55,10 @@ class CustomMocks {
 	 * @returns {Discord.User}
 	 */
 	static getUser(options?: Partial<APIUser>, client?: Discord.Client): Discord.User {
-		return new Discord.User(client ?? BaseMocks.getClient(), {
-			...USER_DEFAULTS,
-			...options
-		});
+		const discordClient = client ?? BaseMocks.getClient();
+		const data = { ...USER_DEFAULTS, ...options };
+
+		return Reflect.construct(Discord.User, [discordClient, data]);
 	}
 
 	/**
@@ -80,10 +67,11 @@ class CustomMocks {
 	 * @returns {Discord.GuildMember}
 	 */
 	static getGuildMember(options?: Partial<APIGuildMember>, extras?: CustomGuildMemberExtras): Discord.GuildMember {
-		return new Discord.GuildMember(extras?.client ?? BaseMocks.getClient(), {
-			...GUILD_MEMBER_DEFAULTS,
-			...options
-		}, extras?.guild ?? BaseMocks.getGuild());
+		const discordClient = extras?.client ?? BaseMocks.getClient();
+		const data = { ...GUILD_MEMBER_DEFAULTS, ...options };
+		const discordGuild = extras?.guild ?? BaseMocks.getGuild();
+
+		return Reflect.construct(Discord.GuildMember, [discordClient, data, discordGuild]);
 	}
 
 	/**
@@ -92,10 +80,10 @@ class CustomMocks {
 	 * @returns {Discord.Message}
 	 */
 	static getMessage(options?: Partial<APIMessage>, extras?: CustomMessageExtras): Discord.Message {
-		const message = new Discord.Message(extras?.client ?? BaseMocks.getClient(), {
-			...GUILD_MESSAGE_DEFAULTS,
-			...options
-		});
+		const discordClient = extras?.client ?? BaseMocks.getClient();
+		const data = { ...GUILD_MESSAGE_DEFAULTS, ...options };
+
+		const message = Reflect.construct(Discord.Message, [discordClient, data]);
 
 		/**
 		 * Both channel and member are "getter" methods that resolve to objects
@@ -119,10 +107,11 @@ class CustomMocks {
 	 * @returns {Discord.MessageReaction}
 	 */
 	static getMessageReaction(options?: Partial<APIReaction>, extras?: CustomMessageReactionExtras): Discord.MessageReaction {
-		return new Discord.MessageReaction(extras?.client ?? BaseMocks.getClient(), {
-			...MESSAGE_REACTION_DEFAULTS,
-			...options
-		}, extras?.message ?? BaseMocks.getMessage());
+		const discordClient = extras?.client ?? BaseMocks.getClient();
+		const data = { ...MESSAGE_REACTION_DEFAULTS, ...options };
+		const message = extras?.message ?? BaseMocks.getMessage();
+
+		return Reflect.construct(Discord.MessageReaction, [discordClient, data, message]);
 	}
 }
 

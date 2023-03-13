@@ -1,4 +1,4 @@
-import { APIGuildMember } from "discord-api-types/v9";
+import { APIGuildMember } from "discord-api-types/v10";
 import USER_DEFAULTS from "./user";
 
 const GUILD_MEMBER_DEFAULTS: APIGuildMember = {
@@ -7,7 +7,8 @@ const GUILD_MEMBER_DEFAULTS: APIGuildMember = {
 	roles: [],
 	joined_at: new Date().toISOString(),
 	deaf: false,
-	mute: false
+	mute: false,
+	flags: 0 // Defaults to 0
 };
 
 export default GUILD_MEMBER_DEFAULTS;
