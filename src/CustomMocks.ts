@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 import BaseMocks from "./BaseMocks";
-import { APIChannel, APIGuild, APIGuildMember, APIMessage, APIReaction, APIUser } from "discord-api-types/v9";
+import { APIChannel, APIGuild, APIGuildMember, APIMessage, APIReaction, APIUser } from "discord-api-types/v10";
 import CustomGuildMemberExtras from "./interfaces/CustomGuildMemberExtras";
 import CustomMessageExtras from "./interfaces/CustomMessageExtras";
 import CustomMessageReactionExtras from "./interfaces/CustomMessageReactionExtras";
